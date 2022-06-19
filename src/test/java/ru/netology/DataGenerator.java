@@ -14,8 +14,10 @@ public class DataGenerator {
         public static DeliveryApplication generateInfo(String Locale) {
             Faker faker = new Faker(new Locale("ru"));
             int days = faker.number().numberBetween(3, 365);
+
             return new DeliveryApplication(
-                faker.address().city(),
+                days,
+                faker.address().cityName(),
                 generateDate(days),
                 faker.name().fullName(),
                 faker.phoneNumber().phoneNumber()
