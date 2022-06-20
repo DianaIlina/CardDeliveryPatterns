@@ -25,8 +25,7 @@ public class CardDeliveryServiceTest {
         int days2 = info.getDays() + 1;
         String date2 = DataGenerator.Registration.generateDate(days2);
 
-        // Configuration.headless = true;
-        Configuration.holdBrowserOpen = true;
+        Configuration.headless = true;
         open("http://localhost:9999");
 
         $x("//*/span[@data-test-id=\"city\"]//input").setValue(info.getCity());
