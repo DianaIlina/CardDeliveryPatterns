@@ -22,8 +22,8 @@ public class CardDeliveryServiceTest {
 
     @Test
     public void shouldCompleteDeliveryForm() {
-        int days2 = info.getDays() + 1;
-        String date2 = DataGenerator.Registration.generateDate(days2);
+        String date1 = DataGenerator.Registration.generateDate();
+        String date2 = DataGenerator.Registration.generateDate();
 
         Configuration.headless = true;
         open("http://localhost:9999");
@@ -31,14 +31,14 @@ public class CardDeliveryServiceTest {
         $x("//*/span[@data-test-id=\"city\"]//input").setValue(info.getCity());
         $x("//*/span[@data-test-id=\"date\"]//input")
                 .sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
-        $x("//*/span[@data-test-id=\"date\"]//input").setValue(info.getDate());
+        $x("//*/span[@data-test-id=\"date\"]//input").setValue(date1);
         $x("//*/span[@data-test-id=\"name\"]//input").setValue(info.getName());
         $x("//*/span[@data-test-id=\"phone\"]//input").setValue(info.getPhone());
         $x("//*/label[@data-test-id=\"agreement\"]").click();
         $(withText("Запланировать")).click();
 
         $x("//*/div[@class=\"notification__content\"]").should(visible, Duration.ofSeconds(15))
-                .shouldHave(Condition.text("Встреча успешно запланирована на " + info.getDate()));
+                .shouldHave(Condition.text("Встреча успешно запланирована на " + date1));
 
         open("http://localhost:9999");
 
